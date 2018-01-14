@@ -51,7 +51,11 @@ public class UserDAOImpl implements UserDAO {
 
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
-
+			user.setId(rs.getInt("id"));
+			user.setFirstname(rs.getString("firstname"));
+			user.setLastname(rs.getString("lastname"));
+			user.setAddress(rs.getString("address"));
+			
 			return user;
 		}
 
@@ -64,7 +68,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public void updateUser(User user) {
-		String sql = "UPDATE users SET firstname = :firstnanme, lastname = :lastname, address = :address WHERE id = :id";
+		String sql = "UPDATE users SET firstname = :firstname, lastname = :lastname, address = :address WHERE id = :id";
 
 		namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(user));
 	}
